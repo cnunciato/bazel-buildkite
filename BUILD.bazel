@@ -1,20 +1,19 @@
-load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_test")
+load("@rules_python//python:defs.bzl", "py_binary", "py_test")
+load("@pip//:requirements.bzl", "requirement")
 
-# Define a Go binary
-go_binary(
+py_binary(
     name = "main",
-    srcs = ["main.go"],
+    srcs = ["main.py"],
     deps = [
-        "@com_github_cnunciato_buildkite_sdk//:go_default_library",  # Add the dependency here
+        requirement("cnunciato-buildkite-sdk")
     ],
 )
 
-# Define Go tests
-go_test(
-    name = "main_test",
-    srcs = ["main_test.go"],
-    embed = [":main"],
+py_test(
+    name = "test_main",
+    srcs = ["test_main.py"],
     deps = [
-        "@com_github_cnunciato_buildkite_sdk//:go_default_library",  # Add the dependency here if used in tests
+        ":main",
+        requirement("cnunciato-buildkite-sdk")
     ],
 )
