@@ -1,6 +1,3 @@
 steps:
-  - label: ":bazel: Run Bazel build"
-    command: "bazel build //:main"
-    
-  - label: ":bazel: Run Bazel tests"
-    command: "bazel test //:test_main"
+  - label: ":bazel: Generate the pipeline"
+    command: "bazel run //:main --ui_event_filters=-INFO --noshow_progress --show_result=0 | buildkite-agent pipeline upload"
