@@ -1,10 +1,30 @@
+# Load and configure Bazel rules for Go and Gazelle
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
+# Fetch the Go rules
 http_archive(
     name = "io_bazel_rules_go",
-    integrity = "sha256-M6zErg9wUC20uJPJ/B3Xqb+ZjCPn/yxFF3QdQEmpdvg=",
-    urls = [
-        "https://mirror.bazel.build/github.com/bazelbuild/rules_go/releases/download/v0.48.0/rules_go-v0.48.0.zip",
-        "https://github.com/bazelbuild/rules_go/releases/download/v0.48.0/rules_go-v0.48.0.zip",
-    ],
+    urls = ["https://github.com/bazelbuild/rules_go/releases/download/v0.48.0/rules_go-v0.48.0.tar.gz"],
+    sha256 = "b3c68fd79890ee3140d9f8b38b1f3e163c1b34b1402cb68f7e41cf25c1d57f63",
+)
+
+# Fetch the Gazelle rules
+http_archive(
+    name = "bazel_gazelle",
+    urls = ["https://github.com/bazelbuild/bazel-gazelle/releases/download/v0.34.0/bazel-gazelle-v0.34.0.tar.gz"],
+    sha256 = "25d13445de19990fa24c2e10ae17c54e4c8c0e93702265e17409f0533a09fc5e",
+)
+
+# Load the Go and Gazelle dependencies
+load("@io_bazel_rules_go//go:deps.bzl", "go_rules_dependencies", "go_register_toolchains")
+load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies")
+
+go_rules_dependencies()
+go_register_toolchains()
+gazelle_dependencies()
+
+go_repository(
+    name = "com_github_cnunciato_buildkite_sdk",
+    importpath = "github.com/cnunciato/buildkite-sdk/sdk/go",
+    version = "v0.0.49",
 )
