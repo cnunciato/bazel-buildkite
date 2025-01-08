@@ -4,7 +4,7 @@ An example of using Bazel with Buildkite! :kite:
 
 [![Build status](https://badge.buildkite.com/0dd04bba50703ab7b6acde47958b30c79b51f21b691520f9bd.svg)](https://buildkite.com/nunciato/bazel-buildkite)
 
-This example uses Bazel to build and test a Python program that renders a Buildkite pipeline definition. The repo uses this same program to [generate the pipeline dynamically](./.main.py) on every commit by passing the result to `buildkite-agent pipeline upload`. 
+This example uses Bazel to build and test a Python program that renders a Buildkite pipeline definition. The repo uses this same program to [generate its own Buildkite pipeline dynamically](./main.py) on every commit by [passing the result to `buildkite-agent pipeline upload`](./.buildkite/pipeline.yml). 
 
 ```bash
 $ bazel build //:main
