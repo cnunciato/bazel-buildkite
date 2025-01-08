@@ -2,6 +2,8 @@
 
 An example of using Bazel with Buildkite! :kite:
 
+[![Build status](https://badge.buildkite.com/0dd04bba50703ab7b6acde47958b30c79b51f21b691520f9bd.svg)](https://buildkite.com/nunciato/bazel-buildkite)
+
 ```bash
 $ bazel build //:main
 
