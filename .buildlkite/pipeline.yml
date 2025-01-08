@@ -1,0 +1,6 @@
+steps:
+  - label: ":bazel: Build"
+    command: "bazel build //:main"
+    
+  - label: ":bazel: Test"
+    command: "bazel test //:test_main"
