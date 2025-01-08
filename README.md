@@ -37,7 +37,12 @@ INFO: Running command line: bazel-bin/main
 {
     "steps": [
         {
-            "command": "echo 'Hello, world!'"
+            "label": ":bazel: Run Bazel build",
+            "command": "bazel build //:main"
+        },
+        {
+            "label": ":bazel: Run Bazel tests",
+            "command": "bazel test //:test_main"
         }
     ]
 }
