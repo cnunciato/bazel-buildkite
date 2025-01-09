@@ -1,0 +1,16 @@
+load("@rules_python//python:defs.bzl", "py_binary", "py_library", "py_test")
+
+py_library(
+    name = "emojis",
+    srcs = ["emojis.py"],
+    deps = [],
+)
+
+py_test(
+    name = "test_emojis",
+    srcs = ["test_emojis.py"],
+    deps = [
+        ":emojis"
+    ],
+    imports = ["."],
+)
