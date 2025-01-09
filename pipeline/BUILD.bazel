@@ -5,6 +5,7 @@ py_binary(
     name = "main",
     srcs = ["main.py"],
     deps = [
+        "//emojis:emojis",
         requirement("cnunciato-buildkite-sdk")
     ],
 )
