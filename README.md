@@ -7,7 +7,7 @@ An example of using Bazel with Buildkite! :kite:
 This example uses Bazel to build and test a Python program that renders a Buildkite pipeline definition. The repo uses this same program to [generate its own Buildkite pipeline dynamically](./main.py) on every commit by [passing the result to `buildkite-agent pipeline upload`](./.buildkite/pipeline.yml). 
 
 ```bash
-$ bazel build //:main
+$ bazel build //pipeline:main
 
 INFO: Analyzed target //:main (0 packages loaded, 0 targets configured).
 INFO: Found 1 target...
@@ -19,7 +19,7 @@ INFO: Build completed successfully, 1 total action
 ```
 
 ```bash
-$ bazel test //:test_main
+$ bazel test //pipeline:test_main
 
 INFO: Analyzed target //:test_main (0 packages loaded, 2 targets configured).
 INFO: Found 1 test target...
@@ -32,16 +32,16 @@ INFO: Build completed successfully, 1 total action
 ```
 
 ```bash
-$ bazel run //:main --ui_event_filters=-INFO --noshow_progress --show_result=0
+$ bazel run //pipeline:main --ui_event_filters=-INFO --noshow_progress --show_result=0
 {
     "steps": [
         {
             "label": ":bazel: Run Bazel build",
-            "command": "bazel build //:main"
+            "command": "bazel build //pipeline:main"
         },
         {
             "label": ":bazel: Run Bazel tests",
-            "command": "bazel test //:test_main"
+            "command": "bazel test //pipeline:test_main"
         }
     ]
 }
