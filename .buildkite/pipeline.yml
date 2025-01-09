@@ -1,3 +1,3 @@
 steps:
   - label: ":python: Generate the pipeline"
-    command: "bazel run //:main --ui_event_filters=-INFO --noshow_progress --show_result=0 | buildkite-agent pipeline upload"
+    command: "bazel run //app:main --ui_event_filters=-INFO --noshow_progress --show_result=0 | buildkite-agent pipeline upload"

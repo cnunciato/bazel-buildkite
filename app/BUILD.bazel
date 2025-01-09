@@ -16,4 +16,5 @@ py_test(
         ":main",
         requirement("cnunciato-buildkite-sdk")
     ],
+    imports = ["."],
 )
