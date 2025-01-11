@@ -1,3 +1,6 @@
 # Generated output files.
 bazel-*
 venv
+
+# User-specific .bazelrc.
+user.bazelrc

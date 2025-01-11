@@ -1,5 +1,5 @@
 from buildkite_sdk import Pipeline
-from emojis.emojis import bazel
+from emojis.emojis import bazel, buildkite
 
 def generate_pipeline():
 	pipeline = Pipeline()
