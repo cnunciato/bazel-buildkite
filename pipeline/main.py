@@ -30,7 +30,7 @@ def generate_pipeline():
 		"label": "{} Upload the package".format(buildkite),
 		"commands": [
 			"bazel build //emojis:emojis",
-			"curl -X POST https://api.buildkite.com/v2/packages/organizations/nunciato/registries/bazel-buildkite-emojis/packages -H \"Authorization: Bearer \"$(buildkite-agent oidc request-token --audience 'https://packages.buildkite.com/nunciato/bazel-buildkite-emojis' --lifetime 300)\" -F \"file=@bazel-bin/emojis/dist/emojis-0.0.1-py3-none-any.whl",
+			"curl -X POST https://api.buildkite.com/v2/packages/organizations/nunciato/registries/bazel-buildkite-emojis/packages -H \"Authorization: Bearer $(buildkite-agent oidc request-token --audience 'https://packages.buildkite.com/nunciato/bazel-buildkite-emojis' --lifetime 300)\" -F file=@bazel-bin/emojis/dist/emojis-0.0.1-py3-none-any.whl",
 			# "twine upload --verbose -u buildkite -p \\" --repository-url 'https://packages.buildkite.com/nunciato/bazel-buildkite-emojis/pypi/simple' bazel-bin/emojis/dist/emojis-0.0.1-py3-none-any.whl"
 		],
 		"depends_on": [
