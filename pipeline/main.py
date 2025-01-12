@@ -27,12 +27,12 @@ def generate_pipeline():
 	})
 
 	pipeline.add_command_step({
+		"key": "auth",
 		"label": "{}".format(buildkite),
 		"command": "buildkite-agent oidc request-token --audience 'https://packages.buildkite.com/nunciato/bazel-buildkite-emojis' --lifetime 300"
 	})
 
 	pipeline.add_command_step({
-		"key": "auth",
 		"label": "{}".format(buildkite),
 		"commands": [
 			"BUILDKITE_REGISTRY_TOKEN=\"$(buildkite-agent oidc request-token --audience 'https://packages.buildkite.com/nunciato/bazel-buildkite-emojis' --lifetime 300)\"",
