@@ -27,10 +27,9 @@ def generate_pipeline():
 	})
 
 	pipeline.add_command_step({
-		"label": "{}".format(buildkite),
+		"label": "{} Upload the package".format(buildkite),
 		"commands": [
-			"pwd",
-			"ls -al",
+			"bazel build //emojis:emojis",
 			"twine upload -u buildkite -p \"$(buildkite-agent oidc request-token --audience 'https://packages.buildkite.com/nunciato/bazel-buildkite-emojis' --lifetime 300)\" --repository-url 'https://packages.buildkite.com/nunciato/bazel-buildkite-emojis' ../bazel-bin/emojis/dist/emojis-0.0.1-py3-none-any.whl"
 		],
 		"depends_on": [
