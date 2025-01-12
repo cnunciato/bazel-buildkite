@@ -1,10 +1,24 @@
-load("@rules_python//python:defs.bzl", "py_library", "py_test")
+load("@rules_python//python:defs.bzl", "py_test")
+load("@rules_python//python:packaging.bzl", "py_wheel", "py_wheel_dist")
 
 py_library(
     name = "emojis",
     srcs = ["emojis.py"],
     visibility = ["//visibility:public"],
     deps = [],
+)
+
+py_wheel(
+    name = "emojis_wheel",
+    distribution = "emojis",
+    version = "0.0.1",
+    deps = [],
+)
+
+py_wheel_dist(
+    name = "emojis_wheel_dist",
+    out = "dist",
+    wheel = ":emojis_wheel",
 )
 
 py_test(

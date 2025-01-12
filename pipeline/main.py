@@ -23,7 +23,17 @@ def generate_pipeline():
 		"label": "{} Test the emoji library".format(bazel),
 		"command": "bazel test //emojis:test_emojis",
 	})
-	
+
+	pipeline.add_command_step({
+		"label": "{}".format(buildkite),
+		"command": "buildkite-agent oidc request-token --audience 'https://packages.buildkite.com/nunciato/bazel-buildkite-emojis' --lifetime 300"
+	})
+
+	# pipeline.add_command_step({
+	# 	"label": "{}".format(buildkite),
+	# 	"command": "buildkite-agent oidc request-token --audience 'https://packages.buildkite.com/nunciato/bazel-buildkite-emojis' --lifetime 300"
+	# })
+
 	return pipeline.to_json()
 
 print(generate_pipeline())
