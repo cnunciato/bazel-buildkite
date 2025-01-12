@@ -27,21 +27,14 @@ def generate_pipeline():
 	})
 
 	pipeline.add_command_step({
-		"key": "auth",
-		"label": "{}".format(buildkite),
-		"command": "buildkite-agent oidc request-token --audience 'https://packages.buildkite.com/nunciato/bazel-buildkite-emojis' --lifetime 300"
-	})
-
-	pipeline.add_command_step({
 		"label": "{}".format(buildkite),
 		"commands": [
 			"BUILDKITE_REGISTRY_TOKEN=\"$(buildkite-agent oidc request-token --audience 'https://packages.buildkite.com/nunciato/bazel-buildkite-emojis' --lifetime 300)\"",
-			"twine upload -u buildkite -p $BUILDKITE_REGISTRY_TOKEN ./bazel-bin/emojis/dist/emojis-0.0.1-py3-none-any.whl"
+			"twine upload -u buildkite -p $BUILDKITE_REGISTRY_TOKEN --repository-url 'https://packages.buildkite.com/nunciato/bazel-buildkite-emojis' ./bazel-bin/emojis/dist/emojis-0.0.1-py3-none-any.whl"
 		],
 		"depends_on": [
 			"test",
 			"build",
-			"auth",
 		]
 	})
 
