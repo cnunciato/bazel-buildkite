@@ -1,1 +1,1 @@
-cnunciato-buildkite-sdk
+buildkite-sdk

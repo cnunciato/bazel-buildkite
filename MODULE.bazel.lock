@@ -275,7 +275,7 @@
         "bzlTransitiveDigest": "gJutazNh8a55gHkw92b6OAmolrHFHGYABLiAwXmIg9c=",
         "usagesDigest": "CL+EPojKHy9P0MBddTsM/eHBNuWGThfHUqypkbYQCds=",
         "recordedFileInputs": {
-          "@@//pipeline/requirements_lock.txt": "ae6f1791b87dadc9c1c5eb9992a0c538a74a53ab9b8377ab83477feb6c6863a0",
+          "@@//pipeline/requirements_lock.txt": "015a396a154241d5d842261435d7e439e6dde9ed1136d3d4d29b6b0ec8d52746",
           "@@rules_python~//tools/publish/requirements_linux.txt": "8175b4c8df50ae2f22d1706961884beeb54e7da27bd2447018314a175981997d",
           "@@rules_fuzzing~//fuzzing/requirements.txt": "ab04664be026b632a0d2a2446c4f65982b7654f5b6851d2f9d399a19b7242a5b",
           "@@rules_python~//tools/publish/requirements_windows.txt": "7673adc71dc1a81d3661b90924d7a7c0fc998cd508b3cb4174337cef3f2de556",
@@ -288,14 +288,14 @@
           "RULES_PYTHON_REPO_DEBUG_VERBOSITY": null
         },
         "generatedRepoSpecs": {
-          "pip_311_cnunciato_buildkite_sdk": {
+          "pip_311_buildkite_sdk": {
             "bzlFile": "@@rules_python~//python/private/pypi:whl_library.bzl",
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
-              "requirement": "cnunciato-buildkite-sdk==0.0.49"
+              "requirement": "buildkite-sdk==0.0.1"
             }
           },
           "pip_311_pyyaml": {
@@ -2916,11 +2916,11 @@
               "repo_name": "pip",
               "extra_hub_aliases": {},
               "whl_map": {
-                "cnunciato_buildkite_sdk": "{\"pip_311_cnunciato_buildkite_sdk\":[{\"version\":\"3.11\"}]}",
+                "buildkite_sdk": "{\"pip_311_buildkite_sdk\":[{\"version\":\"3.11\"}]}",
                 "pyyaml": "{\"pip_311_pyyaml\":[{\"version\":\"3.11\"}]}"
               },
               "packages": [
-                "cnunciato_buildkite_sdk",
+                "buildkite_sdk",
                 "pyyaml"
               ],
               "groups": {}
