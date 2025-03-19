@@ -47,7 +47,7 @@ def generate_pipeline():
 				"-H \"Authorization: Bearer $(buildkite-agent oidc request-token " + 
 				"--audience 'https://packages.buildkite.com/nunciato/bazel-buildkite-emojis' " +
 				"--lifetime 300)\" " +
-				"-F file=@bazel-bin/emojis/dist/emojis-0.0.4-py3-none-any.whl",
+				"-F file=@bazel-bin/emojis/dist/emojis-0.0.5-py3-none-any.whl",
 		],
 		depends_on=[
 			"test",
