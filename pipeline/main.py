@@ -43,8 +43,7 @@ def generate_pipeline():
             commands=[
                 "bazel build //emojis:all",
                 (
-					"curl --request POST https://api.buildkite.com/v2/packages/organizations/nunciato/"
-						"registries/bazel-buildkite-emojis/packages "
+					"curl --request POST https://api.buildkite.com/v2/packages/organizations/nunciato/registries/bazel-buildkite-emojis/packages "
 						"--header \"Authorization: Bearer $(buildkite-agent oidc request-token "
 						"--audience 'https://packages.buildkite.com/nunciato/bazel-buildkite-emojis' "
 						"--lifetime 300)\" "
