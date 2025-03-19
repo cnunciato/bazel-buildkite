@@ -40,11 +40,13 @@ def generate_pipeline():
 		label="{} Upload the package".format(buildkite),
 		commands=[
 			"bazel build //emojis:all",
-			"curl -X POST https://api.buildkite.com/v2/packages/organizations/nunciato/registries/bazel-buildkite-emojis/packages " + 
-				"-H \"Authorization: Bearer $(buildkite-agent oidc request-token " + 
+			"curl " +
+			    "--request POST https://api.buildkite.com/v2/packages/organizations/nunciato/registries/bazel-buildkite-emojis/packages " + 
+				"--header \"Authorization: Bearer $(buildkite-agent oidc request-token " + 
+				"--form file=@bazel-bin/emojis/dist/emojis-0.0.5-py3-none-any.whl",
 				"--audience 'https://packages.buildkite.com/nunciato/bazel-buildkite-emojis' " +
 				"--lifetime 300)\" " +
-				"-F file=@bazel-bin/emojis/dist/emojis-0.0.5-py3-none-any.whl",
+				"--fail"
 		],
 		depends_on=[
 			"test",
