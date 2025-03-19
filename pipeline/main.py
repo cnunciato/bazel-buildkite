@@ -8,7 +8,10 @@ def generate_pipeline():
 
 	pipeline.add_step(CommandStep(
 		label="{} Build the pipeline binary".format(bazel),
-		commands="bazel build //pipeline:main",
+		commands=[
+			"brew install bazelisk",
+			"bazel build //pipeline:main"
+		],
 	))
 	
 	pipeline.add_step(CommandStep(
