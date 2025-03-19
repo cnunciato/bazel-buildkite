@@ -1,3 +1,7 @@
 #!/bin/bash
 
+# Install Bazel. Here, we're installing Bazelisk with Homebrew, as we're running
+# on macOS hosted agents. If you were running on another operating system, you'd
+# adapt this script to install Bazel in whatever way is appropriate for your OS.
+# https://bazel.build/install
 brew install bazelisk
