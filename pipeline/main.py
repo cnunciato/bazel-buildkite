@@ -25,7 +25,6 @@ def generate_pipeline():
 		key="build",
 		label="{} Build the emoji library".format(bazel),
 		commands=[
-			"brew install bazelisk",
 			"bazel build //emojis:emojis"
 		],
 	))
@@ -41,7 +40,6 @@ def generate_pipeline():
 	pipeline.add_step(CommandStep(
 		label="{} Upload the package".format(buildkite),
 		commands=[
-			"brew install bazelisk",
 			"bazel build //emojis:all",
 			"curl -X POST https://api.buildkite.com/v2/packages/organizations/nunciato/registries/bazel-buildkite-emojis/packages " + 
 				"-H \"Authorization: Bearer $(buildkite-agent oidc request-token " + 
