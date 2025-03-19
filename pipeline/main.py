@@ -16,24 +16,32 @@ def generate_pipeline():
 	
 	pipeline.add_step(CommandStep(
 		label="{} Test the pipeline binary".format(bazel),
-		commands="bazel test //pipeline:test_main",
+		commands=[
+			"bazel test //pipeline:test_main"
+		],
 	))
 
 	pipeline.add_step(CommandStep(
 		key="build",
 		label="{} Build the emoji library".format(bazel),
-		commands="bazel build //emojis:emojis",
+		commands=[
+			"brew install bazelisk",
+			"bazel build //emojis:emojis"
+		],
 	))
 	
 	pipeline.add_step(CommandStep(
 		key="test",
 		label="{} Test the emoji library".format(bazel),
-		commands="bazel test //emojis:test_emojis",
+		commands=[
+			"bazel test //emojis:test_emojis"
+		],
 	))
 
 	pipeline.add_step(CommandStep(
 		label="{} Upload the package".format(buildkite),
 		commands=[
+			"brew install bazelisk",
 			"bazel build //emojis:all",
 			"curl -X POST https://api.buildkite.com/v2/packages/organizations/nunciato/registries/bazel-buildkite-emojis/packages " + 
 				"-H \"Authorization: Bearer $(buildkite-agent oidc request-token " + 
