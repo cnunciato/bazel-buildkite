@@ -4,6 +4,8 @@ from emojis.emojis import bazel, buildkite
 def generate_pipeline():
 	pipeline = Pipeline()
 
+	pipeline.add_agent("queue", "hosted-macos")
+
 	pipeline.add_step(CommandStep(
 		label="{} Build the pipeline binary".format(bazel),
 		commands="bazel build //pipeline:main",
