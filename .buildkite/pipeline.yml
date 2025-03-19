@@ -1,5 +1,8 @@
 steps:
   - label: ":python: Generate the pipeline"
     commands:
-      - curl https://github.com/bazelbuild/bazelisk/releases/download/v1.25.0/bazelisk-amd64.deb -o bazelisk-amd64.deb && sudo dpkg -i bazelisk-amd64.deb
+      - curl -LO https://github.com/bazelbuild/bazelisk/releases/download/v1.25.0/bazelisk-amd64.deb bazelisk-amd64.deb
+      - sudo dpkg -i bazelisk-amd64.deb
+      - sudo apt-get install -f
+      - bazel version
       - bazel run //pipeline:main --ui_event_filters=-INFO --noshow_progress --show_result=0 | buildkite-agent pipeline upload
