@@ -45,7 +45,7 @@ pipeline.add_step(
 					"--header \"Authorization: Bearer $(buildkite-agent oidc request-token "
 					"--audience 'https://packages.buildkite.com/nunciato/bazel-buildkite-emojis' "
 					"--lifetime 300)\" "
-					"--form file=@bazel-bin/emojis/dist/emojis-0.0.5-py3-none-any.whl "
+					"--form file=@bazel-bin/emojis/dist/emojis-0.0.6-py3-none-any.whl "
 					"--fail"
 			),
 		],
