@@ -1,3 +1,5 @@
 steps:
   - label: ":python: Generate the pipeline"
-    command: "bazel run //pipeline:main --ui_event_filters=-INFO --noshow_progress --show_result=0 | buildkite-agent pipeline upload"
+    commands:
+      - sudo apt update && sudo apt install -y bazelisk
+      - "bazel run //pipeline:main --ui_event_filters=-INFO --noshow_progress --show_result=0 | buildkite-agent pipeline upload"
