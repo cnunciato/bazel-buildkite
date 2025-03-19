@@ -46,7 +46,7 @@ def generate_pipeline():
 					"curl --request POST https://api.buildkite.com/v2/packages/organizations/nunciato/registries/bazel-buildkite-emojis/packages "
 						"--header \"Authorization: Bearer $(buildkite-agent oidc request-token "
 						"--audience 'https://packages.buildkite.com/nunciato/bazel-buildkite-emojis' "
-						"--lifetime 300\" "
+						"--lifetime 300)\" "
 						"--form file=@bazel-bin/emojis/dist/emojis-0.0.7-py3-none-any.whl "
 						"--fail"
 				),
