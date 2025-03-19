@@ -15,4 +15,8 @@ python.toolchain(
     python_version = "3.11",
 )
 
+<<<<<<< HEAD
 use_repo(pip, "pip")
+=======
+use_repo(pip, "pip")
+>>>>>>> 5b03c5b (Install Bazel with Bazelisk)
