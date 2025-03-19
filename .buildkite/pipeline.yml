@@ -1,5 +1,8 @@
 steps:
   - label: ":python: Generate the pipeline"
+    plugins:
+      - docker#v5.12.0:
+          image: "ubuntu:22.04"
     commands:
       # Install Bazel.
       - curl -LO https://github.com/bazelbuild/bazelisk/releases/download/v1.25.0/bazelisk-amd64.deb
@@ -7,7 +10,7 @@ steps:
       - sudo apt-get install -f
       - bazel version
 
-      - useradd -m buildkite-user
+      # - useradd -m buildkite-user
       # - su - buildkite-user
-      - sudo -u buildkite-user bash -c "bazel run //pipeline:main --ui_event_filters=-INFO --noshow_progress --show_result=0 | buildkite-agent pipeline upload"
-      # - bazel run //pipeline:main --ui_event_filters=-INFO --noshow_progress --show_result=0 | buildkite-agent pipeline upload
+      # - sudo -u buildkite-user bash -c "bazel run //pipeline:main --ui_event_filters=-INFO --noshow_progress --show_result=0 | buildkite-agent pipeline upload"
+      - bazel run //pipeline:main --ui_event_filters=-INFO --noshow_progress --show_result=0 | buildkite-agent pipeline upload
