@@ -4,6 +4,9 @@ steps:
       - docker#v5.12.0:
           image: "ubuntu:22.04"
     commands:
+      - apt-get -y update
+      - apt-get -y install curl
+      
       # Install Bazel.
       - curl -LO https://github.com/bazelbuild/bazelisk/releases/download/v1.25.0/bazelisk-amd64.deb
       - sudo dpkg -i bazelisk-amd64.deb
