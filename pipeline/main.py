@@ -86,4 +86,4 @@ def generate_pipeline(version):
     return pipeline.to_json()
 
 
-print(generate_pipeline("0.0.9"))
+print(generate_pipeline("0.0.10"))
