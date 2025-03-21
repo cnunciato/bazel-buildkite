@@ -39,17 +39,26 @@ def generate_pipeline():
 
     pipeline.add_step(
         CommandStep(
-            label="{} Upload the package".format(buildkite),
+            label=f"{buildkite} Upload the package",
             commands=[
                 "bazel build //emojis:all",
                 (
-					"curl --request POST https://api.buildkite.com/v2/packages/organizations/nunciato/registries/bazel-buildkite-emojis/packages "
-						"--header \"Authorization: Bearer $(buildkite-agent oidc request-token "
-						"--audience 'https://packages.buildkite.com/nunciato/bazel-buildkite-emojis' "
-						"--lifetime 300)\" "
-						"--form file=@bazel-bin/emojis/dist/emojis-0.0.7-py3-none-any.whl "
-						"--fail"
-				),
+                    "curl --request POST https://api.buildkite.com/v2/packages/organizations/nunciato/registries/bazel-buildkite-emojis/packages "
+                    '--header "Authorization: Bearer $(buildkite-agent oidc request-token '
+                    "--audience 'https://packages.buildkite.com/nunciato/bazel-buildkite-emojis' "
+                    '--lifetime 300)" '
+                    "--form file=@bazel-bin/emojis/dist/emojis-0.0.8-py3-none-any.whl "
+                    "--fail"
+                ),
+            ],
+            artifact_paths=["bazel-bin/emojis/dist/emojis-0.0.8-py3-none-any.whl"],
+            plugins=[
+                {
+                    "generate-provenance-attestation#v1.1.0": {
+                        "artifacts": "bazel-bin/emojis/dist/emojis-0.0.8-py3-none-any.whl",
+                        "attestation_name": "attestation.json",
+                    }
+                }
             ],
             depends_on=[
                 "test",
