@@ -2,7 +2,7 @@ from buildkite_sdk import Pipeline, CommandStep
 from emojis.emojis import bazel, buildkite
 
 
-def generate_pipeline():
+def generate_pipeline(version):
     pipeline = Pipeline()
 
     pipeline.add_agent("queue", "hosted-macos")
@@ -39,26 +39,19 @@ def generate_pipeline():
 
     pipeline.add_step(
         CommandStep(
-            label=f"{buildkite} Upload the package",
+            key="sign",
+            label=f"{buildkite} Generate attestation",
             commands=[
                 "bazel build //emojis:all",
-                (
-                    "curl --request POST https://api.buildkite.com/v2/packages/organizations/nunciato/registries/bazel-buildkite-emojis/packages "
-                    '--header "Authorization: Bearer $(buildkite-agent oidc request-token '
-                    "--audience 'https://packages.buildkite.com/nunciato/bazel-buildkite-emojis' "
-                    '--lifetime 300)" '
-                    "--form file=@bazel-bin/emojis/dist/emojis-0.0.8-py3-none-any.whl "
-                    "--fail"
-                ),
             ],
-            artifact_paths=["bazel-bin/emojis/dist/emojis-0.0.8-py3-none-any.whl"],
+            artifact_paths=[f"bazel-bin/emojis/dist/emojis-{version}-py3-none-any.whl"],
             plugins=[
                 {
                     "generate-provenance-attestation#v1.1.0": {
-                        "artifacts": "bazel-bin/emojis/dist/emojis-0.0.8-py3-none-any.whl",
+                        "artifacts": f"bazel-bin/emojis/dist/emojis-{version}-py3-none-any.whl",
                         "attestation_name": "attestation.json",
                     }
-                }
+                },
             ],
             depends_on=[
                 "test",
@@ -67,7 +60,30 @@ def generate_pipeline():
         )
     )
 
+    pipeline.add_step(
+        CommandStep(
+            label=f"{buildkite} Upload the package",
+            commands=[
+                "bazel build //emojis:all",
+            ],
+            plugins=[
+                {
+                    "publish-to-packages#v2.2.0": {
+                        "artifacts": f"bazel-bin/emojis/dist/emojis-{version}-py3-none-any.whl",
+                        "registry": "nunciato/bazel-buildkite-emojis",
+                        "attestations": [
+                            "attestation.json",
+                        ],
+                    }
+                }
+            ],
+            depends_on=[
+                "sign",
+            ],
+        )
+    )
+
     return pipeline.to_json()
 
 
-print(generate_pipeline())
+print(generate_pipeline("0.0.9"))
