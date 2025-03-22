@@ -275,7 +275,7 @@
         "bzlTransitiveDigest": "gJutazNh8a55gHkw92b6OAmolrHFHGYABLiAwXmIg9c=",
         "usagesDigest": "CL+EPojKHy9P0MBddTsM/eHBNuWGThfHUqypkbYQCds=",
         "recordedFileInputs": {
-          "@@//pipeline/requirements_lock.txt": "32f511a0bdf09afd40a9d313e4a9d787e5b4d6072e4673f2072c68e35552ec6b",
+          "@@//pipeline/requirements_lock.txt": "0687536ef6201f21c1539c133b385e205ac94e44620b55e36b6a263883002175",
           "@@rules_python~//tools/publish/requirements_linux.txt": "8175b4c8df50ae2f22d1706961884beeb54e7da27bd2447018314a175981997d",
           "@@rules_fuzzing~//fuzzing/requirements.txt": "ab04664be026b632a0d2a2446c4f65982b7654f5b6851d2f9d399a19b7242a5b",
           "@@rules_python~//tools/publish/requirements_windows.txt": "7673adc71dc1a81d3661b90924d7a7c0fc998cd508b3cb4174337cef3f2de556",
@@ -295,7 +295,7 @@
               "dep_template": "@pip//{name}:{target}",
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
-              "requirement": "buildkite-sdk==0.1.0"
+              "requirement": "buildkite-sdk==0.2.0"
             }
           },
           "pip_311_pyyaml": {
