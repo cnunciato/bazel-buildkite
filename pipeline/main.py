@@ -43,6 +43,8 @@ def generate_pipeline(version):
             label=f"{buildkite} Generate attestation",
             commands=[
                 "bazel build //emojis:all",
+                "sleep 10",
+                """echo '{"steps": [{"command": "echo hiworld"}]}' | buildkite-agent pipeline upload"""
             ],
             artifact_paths=[f"bazel-bin/emojis/dist/emojis-{version}-py3-none-any.whl"],
             plugins=[
@@ -86,4 +88,4 @@ def generate_pipeline(version):
     return pipeline.to_json()
 
 
-print(generate_pipeline("0.0.10"))
+print(generate_pipeline("0.0.11"))

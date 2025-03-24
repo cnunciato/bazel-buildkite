@@ -11,7 +11,7 @@ py_library(
 py_wheel(
     name = "emojis_wheel",
     distribution = "emojis",
-    version = "0.0.10",
+    version = "0.0.11",
     deps = [],
 )
 

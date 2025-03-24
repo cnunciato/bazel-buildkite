@@ -1,5 +1,6 @@
 import unittest
 import emojis
+import random
 
 class TestEmojis(unittest.TestCase):
     def test_emojis(self):
