@@ -51,7 +51,7 @@ def generate_pipeline(version):
         CommandStep(
             key="sign",
             label=f"{buildkite} Generate attestation",
-            commands=[f"""cat {optional.to_yaml()} | buildkite-agent pipeline"""],
+            commands=[f"""cat "{optional.to_yaml()}" | buildkite-agent pipeline"""],
             artifact_paths=[f"bazel-bin/emojis/dist/emojis-{version}-py3-none-any.whl"],
             plugins=[
                 {
