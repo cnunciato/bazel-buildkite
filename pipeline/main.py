@@ -37,21 +37,11 @@ def generate_pipeline(version):
         )
     )
 
-    # optional = Pipeline()
-    # optional.add_step(
-    #     CommandStep(
-    #         label=f"{books} Build and deploy the docs",
-    #         commands=[
-    #             "echo 'Building the docs...'",
-    #         ],
-    #     )
-    # )
-
     pipeline.add_step(
         CommandStep(
             key="sign",
             label=f"{buildkite} Generate attestation",
-            commands=["echo 'Generating SLSA attestation..."],
+            commands=["echo 'Generating SLSA attestation...'"],
             artifact_paths=[f"bazel-bin/emojis/dist/emojis-{version}-py3-none-any.whl"],
             plugins=[
                 {
