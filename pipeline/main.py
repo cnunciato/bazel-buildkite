@@ -1,5 +1,5 @@
 from buildkite_sdk import Pipeline, CommandStep
-from emojis.emojis import bazel, buildkite
+from emojis.emojis import bazel, buildkite, books
 
 
 def generate_pipeline(version):
@@ -37,15 +37,21 @@ def generate_pipeline(version):
         )
     )
 
+    optional = Pipeline()
+    optional.add_step(
+        CommandStep(
+            label=f"{books} Build and deploy the docs",
+            commands=[
+                "echo 'Building the docs...'",
+            ],
+        )
+    )
+
     pipeline.add_step(
         CommandStep(
             key="sign",
             label=f"{buildkite} Generate attestation",
-            commands=[
-                "bazel build //emojis:all",
-                "sleep 10",
-                """echo '{"steps": [{"command": "echo hiworld"}]}' | buildkite-agent pipeline upload"""
-            ],
+            commands=[f"""cat {optional.to_yaml()} | buildkite-agent pipeline"""],
             artifact_paths=[f"bazel-bin/emojis/dist/emojis-{version}-py3-none-any.whl"],
             plugins=[
                 {
@@ -88,4 +94,4 @@ def generate_pipeline(version):
     return pipeline.to_json()
 
 
-print(generate_pipeline("0.0.11"))
+print(generate_pipeline("0.0.12"))
