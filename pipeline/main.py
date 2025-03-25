@@ -1,5 +1,5 @@
 from buildkite_sdk import Pipeline, CommandStep
-from emojis.emojis import bazel, buildkite, books
+from emojis.emojis import bazel, buildkite
 
 
 def generate_pipeline(version):
@@ -25,7 +25,15 @@ def generate_pipeline(version):
         CommandStep(
             key="build",
             label=f"{bazel} Build the emoji library",
-            commands=["bazel build //emojis:emojis"],
+            commands=["bazel build //emojis:emojis --build_event_json_file=bazel-events.json"],
+            plugins=[
+                {
+                    "mcncl/bazel-annotate#v0.1.0": {
+                        "bep_file": "bazel-events.json",
+                        "skip_if_no_bep": True,
+                    }
+                },
+            ],
         )
     )
 
@@ -41,7 +49,9 @@ def generate_pipeline(version):
         CommandStep(
             key="sign",
             label=f"{buildkite} Generate attestation",
-            commands=["echo 'Generating SLSA attestation...'"],
+            commands=[
+                "bazel build //emojis:all",
+            ],
             artifact_paths=[f"bazel-bin/emojis/dist/emojis-{version}-py3-none-any.whl"],
             plugins=[
                 {
@@ -84,4 +94,4 @@ def generate_pipeline(version):
     return pipeline.to_json()
 
 
-print(generate_pipeline("0.0.13"))
+print(generate_pipeline("0.0.12"))
